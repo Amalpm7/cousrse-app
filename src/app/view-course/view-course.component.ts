@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-view-course',
@@ -7,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewCourseComponent implements OnInit {
 
-  constructor() { }
-  viewCourse=
-  [
-    {"course_name":"BCA","description":"Bachelor of Vomputer Application","type":"Offline","duration":"3Yr"}
-  ]
+  constructor(private myapi:ApiService) { this.putViewCourse()}
+  putViewCourse=()=>{
+    this.myapi.getData().subscribe(
+      (data)=>{
+        this.viewCourse=data
+      }
+    )
+  }
+  viewCourse:any=[]
+  
 
   ngOnInit(): void {
   }
